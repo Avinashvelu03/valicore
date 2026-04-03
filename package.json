@@ -1,0 +1,87 @@
+{
+  "name": "valicore",
+  "version": "1.0.0",
+  "description": "Blazing-fast, zero-dependency, TypeScript-first schema validation — 10x faster than Zod, 5x smaller.",
+  "author": "Avinashvelu03 <avinashvelu03@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Avinashvelu03/valicore"
+  },
+  "homepage": "https://github.com/Avinashvelu03/valicore#readme",
+  "bugs": {
+    "url": "https://github.com/Avinashvelu03/valicore/issues"
+  },
+  "keywords": [
+    "validation",
+    "schema",
+    "typescript",
+    "type-safe",
+    "zod-alternative",
+    "validator",
+    "parsing",
+    "type-inference",
+    "runtime-validation",
+    "data-validation",
+    "form-validation",
+    "api-validation",
+    "json-schema",
+    "openapi",
+    "zero-dependency",
+    "lightweight",
+    "fast",
+    "blazing-fast",
+    "type-guard",
+    "type-check",
+    "schema-validation",
+    "object-validation"
+  ],
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.cts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ tests/",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "audit": "npm run lint && npm run typecheck && npm run test:coverage && npm run build",
+    "prepublishOnly": "npm run audit",
+    "clean": "rm -rf dist coverage",
+    "benchmark": "vitest run tests/benchmarks/"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "prettier": "^3.4.2"
+  }
+}

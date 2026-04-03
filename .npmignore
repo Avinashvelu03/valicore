@@ -1,0 +1,15 @@
+src/
+tests/
+coverage/
+*.config.ts
+*.config.js
+.eslint*
+.prettier*
+.editorconfig
+.github/
+tsconfig*.json
+vitest*
+CONTRIBUTING.md
+SECURITY.md
+CODE_OF_CONDUCT.md
+CHANGELOG.md
