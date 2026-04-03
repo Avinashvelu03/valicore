@@ -2,15 +2,13 @@ import { describe, it, expect } from "vitest";
 
 // Import from index.ts itself to cover that file
 import v, {
-  string, number, boolean, date, bigint, symbol,
-  any, unknown, literal, object, array, tuple, union,
-  discriminatedUnion, intersection, record, map, set,
-  enumSchema, nativeEnum, promise, lazy, custom, preprocess, coerce,
-  nan, neverSchema, undefinedSchema, nullSchema, voidSchema,
+  string, boolean,
+  any, unknown, literal, coerce,
   ValiError, ok, fail, isOk, isFail,
-  deepMerge, deepClone, isPlainObject, isPrimitive, hasOwn, isPromise,
-  formatPath, formatValue, toJSONSchema, toOpenAPI,
+  isPrimitive, hasOwn, isPromise,
+  formatPath, toJSONSchema, toOpenAPI,
 } from "../../src/index.js";
+import * as indexNs from "../../src/index.js";
 
 import { bigint as bi } from "../../src/schemas/bigint.js";
 import { date as dt } from "../../src/schemas/date.js";
@@ -20,12 +18,23 @@ import { union as un, intersection as intr, discriminatedUnion as du } from "../
 import { string as str } from "../../src/schemas/string.js";
 import { number as num } from "../../src/schemas/number.js";
 import { object as obj } from "../../src/schemas/object.js";
-import { TupleSchema, tuple as tup } from "../../src/schemas/composite.js";
-import { NeverSchema, neverSchema as nv } from "../../src/schemas/primitives.js";
-import { NativeEnumSchema, nativeEnum as ne } from "../../src/schemas/special.js";
+import { tuple as tup } from "../../src/schemas/composite.js";
+import { neverSchema as nv } from "../../src/schemas/primitives.js";
+import { nativeEnum as ne } from "../../src/schemas/special.js";
 
 // ─── index.ts coverage ────────────────────────────────────────────────────────
 describe("index.ts default exports (v namespace)", () => {
+  it("module namespace getters are reachable", () => {
+    expect(typeof indexNs.string).toBe("function");
+  });
+  it("v namespace getter descriptor is reachable", () => {
+    const descriptor = Object.getOwnPropertyDescriptor(v, "string");
+    if (descriptor?.get) {
+      expect(typeof descriptor.get()).toBe("function");
+      return;
+    }
+    expect(typeof v.string).toBe("function");
+  });
   it("v.string() works", () => expect(v.string().parse("hello")).toBe("hello"));
   it("v.number() works", () => expect(v.number().parse(42)).toBe(42));
   it("v.boolean() works", () => expect(v.boolean().parse(true)).toBe(true));

@@ -11,7 +11,6 @@ import { object as obj } from "../../src/schemas/object.js";
 import { literal } from "../../src/schemas/literal.js";
 import { record as rec } from "../../src/schemas/collections.js";
 import {
-  union as un,
   discriminatedUnion as du,
   intersection as intr,
 } from "../../src/schemas/composite.js";
@@ -312,9 +311,6 @@ describe("schema.ts branch coverage completeness", () => {
 describe("TransformSchema inner failure path", () => {
   it("transform is not called when inner schema fails", () => {
     let transformCalled = false;
-    const schema = str()
-      .transform((v) => { transformCalled = true; return v.length; })
-      .pipe(num());
     // str() fails on number input
     expect(() => str().transform(() => { transformCalled = true; return 1; }).parse(42 as any)).toThrow();
     expect(transformCalled).toBe(false);

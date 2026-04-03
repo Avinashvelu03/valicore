@@ -20,7 +20,8 @@ export function toOpenAPI(
 ): OpenAPISchemaObject {
   const jsonSchema = toJSONSchema(schema);
   // Remove $schema — not part of OpenAPI
-  const { $schema: _removed, ...rest } = jsonSchema;
+  const { $schema, ...rest } = jsonSchema;
+  void $schema;
 
   const result: OpenAPISchemaObject = { ...rest };
 

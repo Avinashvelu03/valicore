@@ -4,8 +4,8 @@ import {
   DefaultSchema, CatchSchema, TransformSchema, BrandedSchema, PipelineSchema,
 } from "../../src/core/schema.js";
 import { string } from "../../src/schemas/string.js";
-import { number } from "../../src/schemas/number.js";
 import { ValiError } from "../../src/core/errors.js";
+import { ok } from "../../src/core/result.js";
 
 describe("Schema base class", () => {
   const s = string();
@@ -170,5 +170,16 @@ describe("Schema base class", () => {
   it("parse throws synchronously on async schema", () => {
     const asyncSchema = s.refine(async (v) => v.length > 0, "err");
     expect(() => asyncSchema.parse("hi")).toThrow("Use parseAsync");
+  });
+
+  it("handles schemas where _parseValue itself is async", async () => {
+    class AsyncValueSchema extends Schema<string> {
+      _parseValue(input: unknown) {
+        return Promise.resolve(ok(String(input)));
+      }
+    }
+
+    const asyncValueSchema = new AsyncValueSchema().refine((v) => v.length > 0, "Required");
+    await expect(asyncValueSchema.parseAsync("x")).resolves.toBe("x");
   });
 });

@@ -4,12 +4,10 @@
 import { describe, it, expect } from "vitest";
 import { string as str } from "../../src/schemas/string.js";
 import { number as num } from "../../src/schemas/number.js";
-import { literal } from "../../src/schemas/literal.js";
 import { object as obj } from "../../src/schemas/object.js";
 import { tuple } from "../../src/schemas/composite.js";
 import { map as mp } from "../../src/schemas/collections.js";
 import { union as un } from "../../src/schemas/composite.js";
-import { ValiError } from "../../src/core/errors.js";
 
 // ─── schema.ts branches 49,51: addIssue with missing code/message ───────────
 // These ?? fallbacks fire when addIssue is called without code or message

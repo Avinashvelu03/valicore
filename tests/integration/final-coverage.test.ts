@@ -3,13 +3,11 @@ import { string as str } from "../../src/schemas/string.js";
 import { number as num } from "../../src/schemas/number.js";
 import { object as obj } from "../../src/schemas/object.js";
 import { record as rec } from "../../src/schemas/collections.js";
-import { union as un, discriminatedUnion as du, intersection as intr } from "../../src/schemas/composite.js";
+import { discriminatedUnion as du, intersection as intr } from "../../src/schemas/composite.js";
 import { literal } from "../../src/schemas/literal.js";
-import { boolean as bool } from "../../src/schemas/boolean.js";
 import { ValiError } from "../../src/core/errors.js";
 import { coerce } from "../../src/schemas/coerce.js";
 import { toJSONSchema } from "../../src/plugins/jsonSchema.js";
-import { date as dt } from "../../src/schemas/date.js";
 
 // ─── errors.ts line 56-57: the `get message()` getter path ────────────────────
 describe("ValiError.message getter", () => {

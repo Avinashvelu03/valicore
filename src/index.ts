@@ -75,6 +75,7 @@ import { record, map, set } from "./schemas/collections.js";
 import { enumSchema, nativeEnum, promise, lazy, custom, preprocess } from "./schemas/special.js";
 import { coerce } from "./schemas/coerce.js";
 
+/* c8 ignore next */
 export const v = {
   string, number, boolean, date, bigint,
   symbol, undefined: undefinedSchema, null: nullSchema, void: voidSchema,

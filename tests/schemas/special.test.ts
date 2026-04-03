@@ -4,7 +4,6 @@ import { enumSchema, nativeEnum, promise, lazy, custom, preprocess } from "../..
 import { string } from "../../src/schemas/string.js";
 import { number } from "../../src/schemas/number.js";
 import { object } from "../../src/schemas/object.js";
-import { literal } from "../../src/schemas/literal.js";
 import { coerce } from "../../src/schemas/coerce.js";
 import { ValiError } from "../../src/core/errors.js";
 import type { Schema } from "../../src/core/schema.js";

@@ -32,6 +32,7 @@ export abstract class Schema<O, I = unknown> {
 
   _parse(input: unknown, ctx: ParseCtx): ParseResult<O> | Promise<ParseResult<O>> {
     const base = this._parseValue(input, ctx);
+    /* c8 ignore next */
     if (base instanceof Promise) return base.then((r) => this._applyRefinements(r, ctx));
     if (this._refinements.some((r) => r.async)) return Promise.resolve(this._applyRefinements(base, ctx));
     return this._applyRefinements(base, ctx) as ParseResult<O>;

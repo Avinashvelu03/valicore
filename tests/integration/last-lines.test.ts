@@ -5,7 +5,6 @@ import { describe, it, expect } from "vitest";
 import { string as str } from "../../src/schemas/string.js";
 import { number as num } from "../../src/schemas/number.js";
 import { object as obj } from "../../src/schemas/object.js";
-import { literal } from "../../src/schemas/literal.js";
 import { intersection as intr, discriminatedUnion as du } from "../../src/schemas/composite.js";
 
 // ─── composite.ts line 214: discriminatedUnion async option that SUCCEEDS ────
