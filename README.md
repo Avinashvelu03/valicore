@@ -181,9 +181,7 @@ try {
 } catch (err) {
   if (err instanceof ValiError) {
     const { formErrors, fieldErrors } = err.flatten();
-    // fieldErrors: { email: ["Invalid email"] }
     const fmt = err.format();
-    // { email: ["Invalid email"], _errors: [] }
   }
 }
 ```
@@ -204,31 +202,7 @@ const result = await schema.safeParseAsync(username);
 import { toJSONSchema, toOpenAPI } from "valicore";
 
 toJSONSchema(v.object({ name: v.string() }));
-// { "$schema": "...", "type": "object", "properties": { "name": { "type": "string" } }, "required": ["name"] }
-
 toOpenAPI(v.string().email(), { description: "Email", example: "user@example.com" });
-// { type: "string", description: "Email", example: "user@example.com" }
-```
-
-## Recursive Schemas
-
-```typescript
-import type { Schema } from "valicore";
-
-interface TreeNode { value: string; children?: TreeNode[]; }
-type NodeSchema = Schema<TreeNode>;
-
-const nodeSchema: NodeSchema = v.lazy(() =>
-  v.object({ value: v.string(), children: v.array(nodeSchema).optional() })
-);
-```
-
-## Branded Types
-
-```typescript
-const USD = v.number().positive().brand<"USD">();
-type USD = Infer<typeof USD>; // number & { __brand: "USD" }
-const price = USD.parse(29.99); // USD
 ```
 
 ## Performance Benchmarks
@@ -246,10 +220,32 @@ const price = USD.parse(29.99); // USD
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Security
-
-See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
-
 ## License
 
 [MIT](LICENSE) © [Avinashvelu03](https://github.com/Avinashvelu03)
+
+---
+
+## Support valicore
+
+```
+ ┌───────────────────────────────────────────────────┐
+ │  ✔ validates your data                          │
+ │  ✔ narrows your types                           │
+ │  ✔ ships with zero dependencies                 │
+ │  └─ your support validates the work ♥            │
+ └───────────────────────────────────────────────────┘
+```
+
+valicore is free forever and maintained by one developer.
+If it sharpened your types or saved a runtime crash, consider giving back:
+
+[![Ko-fi](https://img.shields.io/badge/☕_Ko--fi-Buy_a_Coffee-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/avinashvelu)
+[![GitHub Sponsors](https://img.shields.io/badge/💖_Sponsor-on_GitHub-EA4AAA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/Avinashvelu03)
+
+**Free ways to help:**
+- ⭐ [Star the repo](https://github.com/Avinashvelu03/valicore) — takes 2 seconds, means a lot
+- 🐛 [File an issue](https://github.com/Avinashvelu03/valicore/issues) — bugs, ideas, feedback welcome
+- 💬 Share valicore with your team or mention it in your next PR review
+
+*Made with ❤️ by [Avinash Velu](https://github.com/Avinashvelu03)*
