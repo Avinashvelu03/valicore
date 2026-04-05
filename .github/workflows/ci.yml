@@ -6,13 +6,16 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
-  test:
-    name: Test (Node ${{ matrix.node-version }})
+  build-and-test:
+    name: Build & Test (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [18.x, 20.x, 22.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,16 +35,33 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
-      - name: Run tests with coverage
-        run: npm run test:coverage
+      - name: Run tests (Vitest)
+        run: npm test
 
       - name: Build
         run: npm run build
 
-      - name: Upload coverage to Codecov
-        if: matrix.node-version == 20
-        uses: codecov/codecov-action@v4
+      - name: Audit production dependencies
+        run: npm audit --audit-level=moderate --omit=dev
+
+  codeql:
+    name: CodeQL Security Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
-          fail_ci_if_error: false
+          languages: javascript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
