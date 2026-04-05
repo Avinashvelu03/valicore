@@ -1,6 +1,6 @@
 {
   "name": "valicore",
-  "version": "1.0.0",
+    "version": "1.0.1",
   "description": "Blazing-fast, zero-dependency, TypeScript-first schema validation — 10x faster than Zod, 5x smaller.",
   "author": "Avinashvelu03 <avinashvelu03@gmail.com>",
   "license": "MIT",
