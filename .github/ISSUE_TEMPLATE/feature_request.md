@@ -1,17 +1,13 @@
 ---
 name: Feature Request
 about: Suggest a new feature for valicore
+title: '[FEAT] '
 labels: enhancement
+assignees: Avinashvelu03
 ---
 
-## Feature Description
+## Problem
 
-## Use Case
+## Proposed Solution
 
-## Proposed API
-
-```typescript
-v.newFeature().something()
-```
-
-## Alternatives Considered
+## Alternatives

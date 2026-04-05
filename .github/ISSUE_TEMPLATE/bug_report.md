@@ -1,23 +1,18 @@
 ---
 name: Bug Report
 about: Report a bug in valicore
+title: '[BUG] '
 labels: bug
+assignees: Avinashvelu03
 ---
 
-## Bug Description
+## Describe the bug
 
-## Reproduction
+## To Reproduce
 
-```typescript
-import { v } from "valicore";
-// Minimal repro here
-```
-
-## Expected Behavior
-
-## Actual Behavior
+## Expected behavior
 
 ## Environment
 - valicore version:
-- Node.js version:
-- TypeScript version:
+- Runtime:
+- OS:
